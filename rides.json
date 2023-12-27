@@ -1,0 +1,135 @@
+[
+    {
+        "destination": "Aljezur",
+        "info": "Tragam cerveja",
+        "license": "65-65-64",
+        "origin": "Alcochete",
+        "origin_lat": 40.142277899999996,
+        "origin_lon": -7.660236500000001,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 4,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "27/12/2023 14:44:00",
+        "id": "Kmn2dGEvJrsPlHKE5LXk"
+    },
+    {
+        "destination": "Covilh\u00e3",
+        "info": "nada",
+        "license": "55-gh-72",
+        "origin": "Mondim de Basto",
+        "origin_lat": 23.453345543,
+        "origin_lon": -4.54335453434,
+        "provider": "456g74h56h7we4h76weh764we",
+        "ride_capacity": 2,
+        "ride_passengers": [
+            "hb546ehn7e5j85e78jjn4"
+        ],
+        "state": "active",
+        "time": "22-12-2023 16:02:22",
+        "id": "M6MnvZhYw4vklwG8aukr"
+    },
+    {
+        "destination": "Portob",
+        "info": "sai as horas",
+        "license": "10-53-qi",
+        "origin": "Coimbra",
+        "origin_lat": 39.53498543757348,
+        "origin_lon": -7.87395487534,
+        "provider": "n70t690769n3360t",
+        "ride_capacity": 3,
+        "ride_passengers": [
+            "Rq34g5g6fWrjKU3",
+            "Rq335g4y46WrjKU3"
+        ],
+        "state": "ongoing",
+        "time": "21-12-2023 15:21:35",
+        "id": "RqQUC95XxhNK6fWrjKU3"
+    },
+    {
+        "destination": "Amarante",
+        "info": "Tragam cerveja",
+        "license": "65-65-64",
+        "origin": "Alf\u00e2ndega da F\u00e9",
+        "origin_lat": 40.0615513,
+        "origin_lon": -7.9276993,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 4,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "27/12/2023 14:45:00",
+        "id": "Y0oyDxJZdABRa2yl5LNJ"
+    },
+    {
+        "destination": "Alandroal",
+        "info": "Nao vomitar no carro",
+        "license": "56-55-65",
+        "origin": "Aguiar da Beira",
+        "origin_lat": 40.2800298,
+        "origin_lon": -7.503217499999999,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 4,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "24/12/2023 16:18:00",
+        "id": "aDovdJtnL1e5GeLXmwBc"
+    },
+    {
+        "destination": "Montemor-o-Velho",
+        "info": "Tragam cerveja",
+        "license": "65-65-64",
+        "origin": "Entroncamento",
+        "origin_lat": 39.860321,
+        "origin_lon": -8.0499922,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 4,
+        "ride_passengers": [
+            "hb546ehn7e5j85e78jjn4"
+        ],
+        "state": "ongoing",
+        "time": "7/3/2024 0:1:00",
+        "id": "lGbZGUqw45n4frQ1n2Hr"
+    },
+    {
+        "destination": "Montemor-o-Velho",
+        "info": "Tragam cerveja",
+        "license": "77-77-77",
+        "origin": "Ferreira do Z\u00eazere",
+        "origin_lat": 39.860321,
+        "origin_lon": -8.0499922,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 4,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "7/3/2024 0:1:00",
+        "id": "n2TiY2tMaS2SJ4a1wX4E"
+    },
+    {
+        "destination": "Montemor-o-Velho",
+        "info": "Tragam cerveja",
+        "license": "65-65-64",
+        "origin": "Almeida",
+        "origin_lat": 39.860321,
+        "origin_lon": -8.0499922,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 4,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "7/3/2024 0:1:00",
+        "id": "qL32lSmEQXG24lVkqBtH"
+    },
+    {
+        "destination": "Montemor-o-Velho",
+        "info": "Tragam cerveja",
+        "license": "65-65-64",
+        "origin": "Estarreja",
+        "origin_lat": 39.860321,
+        "origin_lon": -8.0499922,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 4,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "7/3/2024 0:1:00",
+        "id": "x47Hxf7Y8XJLAJRpqbGR"
+    }
+]

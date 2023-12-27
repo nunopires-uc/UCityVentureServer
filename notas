@@ -1,0 +1,14 @@
+# Reference the 'rides' collection
+rides_collection = db.collection('rides')
+
+# Get all documents in the 'rides' collection
+docs = rides_collection.stream()
+
+# Iterate over each document and compare specific field values
+for doc in docs:
+    doc_dict = doc.to_dict()  # Convert the document to a dictionary
+    driver_name = doc_dict.get('driver', '')  # Safely get the driver field
+
+    # Perform your string comparison
+    if driver_name == 'John Doe':
+        print(f'{doc.id} => {doc_dict}')
