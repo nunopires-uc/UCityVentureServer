@@ -2,109 +2,101 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import threading
 import time
-from getRides import update_rides_in_memory, load_rides_from_file, save_rides_in_memory, check_for_matches
+from getRides import update_rides_in_memory, load_rides_from_file, save_rides_in_memory, check_for_matches, update_rides_in_memory_all_atr
+from ScanConfirmation import ScanConfirmation
 
-# Initialize the Firebase admin SDK with your credentials
 cred = credentials.Certificate("ucityventure-firebase-adminsdk-ieyv3-2d19b3f652.json")
 firebase_admin.initialize_app(cred)
 
 
 filename = 'rides.json'
-# Call the function to load rides from the file
-rides_in_memory = load_rides_from_file(filename)
 
 
-'''
-# Now rides_in_memory contains a list of ride dictionaries
-for ride_dict in rides_in_memory:
-    print(ride_dict)  # This will print out each ride's information as a dictionary
-'''
-# Transaction function
-
-def transaction_update(doc_ref, token, updated_token):
-   # Fetch the entire 'queue' array
-   doc = doc_ref.get()
-   queue = doc.get('queue')
-   
-   if queue: # Check if the queue is not empty
-       # Find the index of the old token
-       index = queue.index(token)
-
-       # Replace the old token with the new one at the same position
-       queue[index] = updated_token
-
-       # Overwrite the entire 'queue' array in Firestore
-       doc_ref.update({'queue': queue})
-
-
+# Thread synchronization event
+callback_done = threading.Event()
 
 # Create a Firestore client
 db = firestore.client()
 
 
 rides_collection = db.collection('rides')
-# Stream the documents in the 'rides' collection
 docs = rides_collection.stream()
-if(len(rides_in_memory) == 0):
-    save_rides_in_memory(docs, filename)
-    rides_in_memory = load_rides_from_file(filename)
+
+print(docs)
+
+save_rides_in_memory(docs, filename)
+rides_in_memory = load_rides_from_file(filename)
 
 
-# Thread synchronization event
-callback_done = threading.Event()
 
-def on_snapshot(doc_snapshot, changes, read_time):
-    for doc in doc_snapshot:
-        print(f"Received document snapshot: {doc.id}")
-        # Access field_queue from the document, assuming field_queue is the correct field name
-        field_queue = doc.get('queue')
-        if field_queue:  # Check if the field_queue is not empty
-            token = field_queue[-1]  # Access the last entry of the array list
-            # Access the PIN field of the last entry
-            print(f"Last entry: {token}")  # Print the last entry
-            PIN = token.split("+")[0]
-            ID_PASSENGER = token.split("+")[1]
-            ID_PROVIDER = token.split("+")[2]
-            STATUS = token.split("+")[3]
-            if(STATUS == "0"):
+def on_snapshot(col_snapshot, changes, read_time):
+    #
+    for change in changes:
+        if change.type.name == 'ADDED':
+            
+            print(f'New document: {change.document.id}')
+            doc = change.document.to_dict()  # Convert the document to a dictionary
+            scan_confirmation = ScanConfirmation()  # Create a new ScanConfirmation object
+            scan_confirmation.setPIN(doc.get('pin'))  # Set the attributes using the document data
+            scan_confirmation.setProviderID(doc.get('providerID'))
+            scan_confirmation.setUserID(doc.get('userID'))
+            scan_confirmation.setStatus(doc.get('status'))
+
+            if(scan_confirmation.getStatus() == "0"):
+
                 rides_list = load_rides_from_file('rides.json')
-                status = check_for_matches(rides_list, ID_PASSENGER, ID_PROVIDER)
-                
+                print(len(rides_list))
+
+                print(scan_confirmation.getUserID())
+                print(scan_confirmation.getProviderID())
+                status = check_for_matches(rides_list, scan_confirmation.getUserID(), scan_confirmation.getProviderID())
+
                 if(status == 1):
                     print("Match found")
                 elif(status == -1):
                     print("Match not found")
 
-                new_token = PIN + "+" + ID_PASSENGER + "+" + ID_PROVIDER + "+" + str(status)
+                scan_confirmation.setStatus(status)
+                
+                doc_ref = db.collection('myqrconfirmations').document(scan_confirmation.getPIN())
 
-                transaction_update(doc_ref, token, new_token)
-        else:
-            print("field_queue is empty or does not exist.")
+                
+                doc_ref.update({
+                    'status': str(status)
+                })
+                
+            print(scan_confirmation)
+
     callback_done.set()
 
 
-def on_snapshotRides(doc_snapshot, changes, read_time):
-    for doc in doc_snapshot:
-        rides_collection = db.collection('rides')
+def repeat_every_30_seconds():
+    threading.Timer(30.0, repeat_every_30_seconds).start()
+    print("Updating rides in memory")
+    update_rides_in_memory_all_atr(db.collection('rides'), filename)
 
-        # Stream the documents in the 'rides' collection
-        docs = rides_collection.stream()
-        
-        print(f"Received document snapshot: {doc.id}")
-        update_rides_in_memory(docs, filename)
-    callback_done.set()
+col_query = db.collection('myqrconfirmations')
+
+query_watch = col_query.on_snapshot(on_snapshot)
 
 
-# Reference to the specific document in the 'transactions' collection
-doc_ref = db.collection("transactions").document("MLRkVMuqJElVYxbD9jxP")
+def on_snapshotRides(col_snapshot, changes, read_time):
+    for change in changes:
+        if change.type.name == 'ADDED':
+            print(f'New Ride: {change.document.id}')
+            update_rides_in_memory_all_atr(db.collection('rides'), filename)
 
-doc_refrides = db.collection("transactions").document("num_rides")
+            
 
-# Start listening to the document
-doc_watch = doc_ref.on_snapshot(on_snapshot)
-doc_watchrides = doc_refrides.on_snapshot(on_snapshotRides)
+# Specify the collection you want to listen to
+col_queryRides = db.collection('rides')
 
-# Keep the main thread running to listen for changes until the process is terminated
+# Attach the listener to the collection
+query_watch = col_queryRides.on_snapshot(on_snapshotRides)
+
+
+repeat_every_30_seconds()
+
 try:
     while True:
         time.sleep(1)

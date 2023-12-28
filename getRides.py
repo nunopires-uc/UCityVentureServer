@@ -90,21 +90,55 @@ def update_rides_in_memory(docs, filename):
         save_rides_to_file(new_rides, filename)
 
 
+def update_rides_in_memory_all_atr(rides_collection, filename):
+    docs = rides_collection.stream()
+
+    rides_to_save = []
+
+    for doc in docs:
+        doc_data = doc.to_dict()
+        ride_id = doc.id
+
+        new_ride = Ride(
+            destination=doc_data.get('destination'),
+            info=doc_data.get('info'),
+            license=doc_data.get('license'),
+            origin=doc_data.get('origin'),
+            origin_lat=doc_data.get('originLat'),
+            origin_lon=doc_data.get('originLon'),
+            provider=doc_data.get('provider'),
+            ride_capacity=doc_data.get('rideCapacity'),
+            ride_passengers=doc_data.get('ridePassangers'),
+            state=doc_data.get('state'),
+            time=doc_data.get('time'),
+            id=doc.id
+        )
+        rides_to_save.append(new_ride)
+
+    # Convert the new rides to dicts
+    new_rides_dicts = [ride.to_dict() for ride in rides_to_save]
+
+    # Save the updated rides to the file
+    save_rides_to_file(new_rides_dicts, filename)
+
+
+
+
 
 def check_for_matches(ride_list, id_passenger, id_provider):
 
-    today_str = datetime.now().strftime("%d-%m-%Y")
-    print(today_str)
+    today_str = datetime.now().strftime("%d/%m/%Y")
     for ride in ride_list:
-
 
         ride_date_str = ride['time'].split(' ')[0]
         print(ride_date_str)
         # If the ride date is not today, continue to the next iteration
         # Check if the current provider matches the given ID_PROVIDER
+
         if ride['provider'] == id_provider:
+            print(ride['id'])
             if ride_date_str == today_str:
             # Check if ID_PASSENGER matches any in the list
-                if not id_passenger or id_passenger in ride['ride_passengers']:
+                if id_passenger in ride['ride_passengers']:
                     return 1  # Match found
     return -1  # No match found

@@ -1,5 +1,53 @@
 [
     {
+        "destination": "Alcoba\u00e7a",
+        "info": "ole",
+        "license": "ma-zu-da",
+        "origin": "Oleiros",
+        "origin_lat": 40.1397226,
+        "origin_lon": -7.681197399999999,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 2,
+        "ride_passengers": [
+            "9z16DWF8JWMQ3ZaNqCYZnQ9Zl7n1"
+        ],
+        "state": "ongoing",
+        "time": "28/12/2023 19:13:00",
+        "id": "7ySEp1sIc8ZNcJAasPo7"
+    },
+    {
+        "destination": "Mafra",
+        "info": "oleo",
+        "license": "hy-un-da",
+        "origin": "Albufeira",
+        "origin_lat": 39.921734099999995,
+        "origin_lon": -8.1429144,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 256,
+        "ride_passengers": [
+            "9z16DWF8JWMQ3ZaNqCYZnQ9Zl7n1"
+        ],
+        "state": "stop",
+        "time": "28/12/2023 4:6:00",
+        "id": "9bUR2C5cYMABi1scQ32Q"
+    },
+    {
+        "destination": "Ovar",
+        "info": "carro novo",
+        "license": "to-yo-ta",
+        "origin": "Alcoba\u00e7a",
+        "origin_lat": 38.6813613,
+        "origin_lon": -8.4483918,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 6,
+        "ride_passengers": [
+            "9z16DWF8JWMQ3ZaNqCYZnQ9Zl7n1"
+        ],
+        "state": "ongoing",
+        "time": "27/12/2023 21:51:00",
+        "id": "Bh6spQ7uML7ddi56JmYA"
+    },
+    {
         "destination": "Aljezur",
         "info": "Tragam cerveja",
         "license": "65-65-64",
@@ -89,6 +137,20 @@
         "state": "ongoing",
         "time": "7/3/2024 0:1:00",
         "id": "lGbZGUqw45n4frQ1n2Hr"
+    },
+    {
+        "destination": "Alcoba\u00e7a",
+        "info": "Tremocos",
+        "license": "43-12-31",
+        "origin": "Aguiar da Beira",
+        "origin_lat": 39.8407942,
+        "origin_lon": -7.489028299999998,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 6,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "27/12/2023 17:18:00",
+        "id": "mEAqucTJMVWhUjiirCYf"
     },
     {
         "destination": "Montemor-o-Velho",
