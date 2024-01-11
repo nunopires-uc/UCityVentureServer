@@ -1,27 +1,29 @@
 import json
-from Ride import Ride  # Import the User class from User.py
+from Ride import Ride
 from datetime import datetime
 
+
+# Função para carregar boleias de um ficheiro
 def load_rides_from_file(filename):
     try:
         with open(filename, 'r') as f:
-            if f.read(1):  # read the first character to check if the file is empty
-                f.seek(0)  # reset the file pointer to the beginning of the file
-                return json.load(f)
+            if f.read(1):  # Verifica se o primeiro caractere do ficheiro é vazio
+                f.seek(0)  # Volta para o início do arquivo
+                return json.load(f)  # Retorna os dados JSON carregados
             else:
-                return []  # Return an empty list if the file is empty
+                return []  # Retorna uma lista vazia se o ficheiro estiver vazio
     except FileNotFoundError:
-        return []  # Return an empty list if the file does not exist
+        return []   # Retorna uma lista vazia se o ficheiro não existir
     except json.JSONDecodeError:
-        return []  # Return an empty list if the file is empty or not valid JSON
+        return []  # Retorna uma lista vazia se o ficheiro não contiver JSON válido
 
-
+# Função para salvar boleias no ficheiro
 def save_rides_to_file(rides, filename):
     with open(filename, 'w') as f:
         # assuming rides is a list of dicts that do not have a serialize() method
         json.dump(rides, f, indent=4)
 
-
+# Função para salvar boleias na memória
 def save_rides_in_memory(docs, filename):
 
     rides_to_save = []
@@ -49,8 +51,9 @@ def save_rides_in_memory(docs, filename):
     # Save the list of ride dicts to file
     save_rides_to_file(rides_to_save_dicts, filename)
 
+# Função para atualizar boleias na memória
 def update_rides_in_memory(docs, filename):
-    # Load existing rides from file
+    # Carrega as boleias existentes do arquivo
     existing_rides = load_rides_from_file(filename)
     #print(existing_rides)
     existing_ids = {ride['id'] for ride in existing_rides}
@@ -61,9 +64,9 @@ def update_rides_in_memory(docs, filename):
     for doc in docs:
         doc_data = doc.to_dict()
         ride_id = doc.id
-        # Check if the ride is not already in memory
+        # Verifica se a boleia não está já na memória
         if ride_id not in existing_ids:
-            # Instantiate a Ride object for the new document and serialize it
+            # Cria um novo objeto Ride com os dados do documento e o serializa
             new_ride = Ride(
                 destination=doc_data.get('destination'),
                 info=doc_data.get('info'),
@@ -80,16 +83,15 @@ def update_rides_in_memory(docs, filename):
             )
             rides_to_save.append(new_ride)
 
-    # If we found new rides, add them to existing ones and save to file
+    # # Se encontrou novas boleias, adiciona-as às existentes e salva-se no ficheiro
     #print(rides_to_save)
 
     if rides_to_save:
         rides_to_save_dicts = [ride.to_dict() for ride in rides_to_save]
-        # Combine with existing rides and serialize
         new_rides = existing_rides + rides_to_save_dicts
         save_rides_to_file(new_rides, filename)
 
-
+# Segunda versão da função de cima
 def update_rides_in_memory_all_atr(rides_collection, filename):
     docs = rides_collection.stream()
 
@@ -124,7 +126,7 @@ def update_rides_in_memory_all_atr(rides_collection, filename):
 
 
 
-
+# Função para verificar correspondências entre passageiros e criadores de boleias
 def check_for_matches(ride_list, id_passenger, id_provider):
 
     today_str = datetime.now().strftime("%d/%m/%Y")
@@ -132,13 +134,13 @@ def check_for_matches(ride_list, id_passenger, id_provider):
 
         ride_date_str = ride['time'].split(' ')[0]
         print(ride_date_str)
-        # If the ride date is not today, continue to the next iteration
-        # Check if the current provider matches the given ID_PROVIDER
+        # Se a data da boleia não for hoje, continua para a próxima iteração
+        # Verifica se o ID do fornecedor atual corresponde ao criador da boleia dado
 
         if ride['provider'] == id_provider:
             print(ride['id'])
             if ride_date_str == today_str:
-            # Check if ID_PASSENGER matches any in the list
+            # Verifica se o ID do passageiro corresponde a algum na lista
                 if id_passenger in ride['ride_passengers']:
                     return 1  # Match found
     return -1  # No match found

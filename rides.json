@@ -5,9 +5,9 @@
         "license": "ma-zu-da",
         "origin": "Oleiros",
         "origin_lat": 40.1397226,
-        "origin_lon": -7.681197399999999,
+        "origin_lon": -7.68,
         "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
-        "ride_capacity": 2,
+        "ride_capacity": 3,
         "ride_passengers": [
             "9z16DWF8JWMQ3ZaNqCYZnQ9Zl7n1"
         ],
@@ -46,6 +46,36 @@
         "state": "ongoing",
         "time": "27/12/2023 21:51:00",
         "id": "Bh6spQ7uML7ddi56JmYA"
+    },
+    {
+        "destination": "Alvito",
+        "info": "volare",
+        "license": "me-rc-ce",
+        "origin": "Almeirim",
+        "origin_lat": 39.7172287,
+        "origin_lon": -8.4571294,
+        "provider": "E4J3K2oCDgcCjJSe7Vn2yyV16yo1",
+        "ride_capacity": 2,
+        "ride_passengers": [
+            "9z16DWF8JWMQ3ZaNqCYZnQ9Zl7n1"
+        ],
+        "state": "ongoing",
+        "time": "30/12/2023 4:0:00",
+        "id": "FRIJN9DUhsdj8mGKZ7ip"
+    },
+    {
+        "destination": "Castro Daire",
+        "info": "",
+        "license": "10-53-hd",
+        "origin": "Alcanena",
+        "origin_lat": 40.5155494,
+        "origin_lon": -8.0830526,
+        "provider": "9z16DWF8JWMQ3ZaNqCYZnQ9Zl7n1",
+        "ride_capacity": 8,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "30/12/2023 3:25:00",
+        "id": "HU2OZ1n5hXq5UGvwY1DE"
     },
     {
         "destination": "Aljezur",
@@ -93,6 +123,20 @@
         "state": "ongoing",
         "time": "21-12-2023 15:21:35",
         "id": "RqQUC95XxhNK6fWrjKU3"
+    },
+    {
+        "destination": "Lousada",
+        "info": "vir cedo",
+        "license": "Au-di-tt",
+        "origin": "Madalena",
+        "origin_lat": 39.4708261,
+        "origin_lon": -8.4762297,
+        "provider": "bqxUeaCzQce3mzwfMF8BRbuWDvt2",
+        "ride_capacity": 5,
+        "ride_passengers": [],
+        "state": "ongoing",
+        "time": "30/12/2023 2:31:00",
+        "id": "Vj4IWC5oxVBMtkyk901n"
     },
     {
         "destination": "Amarante",
